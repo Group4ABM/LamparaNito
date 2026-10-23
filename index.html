@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lygodium Circinnatum (Nito)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-gradient-start: #1c0e07;
+            --bg-gradient-mid: #3a1c0d;
+            --bg-gradient-end: #5a2e14;
+            --primary-amber: #d4a373;
+            --gold-accent: #e6b800;
+            --gold-hover: #ffcc00;
+            --warm-ivory: rgba(253, 248, 240, 0.92);
+            --card-glass: rgba(255, 250, 242, 0.82);
+            --card-border: rgba(212, 163, 115, 0.35);
+            --card-border-hover: rgba(230, 184, 0, 0.65);
+            --text-dark: #2b180d;
+            --text-muted: #6e4d3b;
+            --text-light: #fefae0;
+            --shadow-glass: 0 12px 32px 0 rgba(0, 0, 0, 0.37);
+            --shadow-card: 0 6px 20px rgba(43, 24, 13, 0.12);
+            --shadow-hover: 0 12px 28px rgba(43, 24, 13, 0.22);
+            --radius-main: 22px;
+            --radius-card: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: radial-gradient(circle at top center, #4a2411 0%, #2b1409 45%, #140804 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            padding: 30px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Main Glassmorphism Container */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            background: rgba(35, 18, 9, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-main);
+            box-shadow: var(--shadow-glass);
+            padding: 24px;
+            border: 1px solid rgba(212, 163, 115, 0.25);
+            overflow: hidden;
+        }
+
+        /* Hero Header Styling */
+        .hero-header {
+            position: relative;
+            width: 100%;
+            min-height: 380px;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+           background: linear-gradient(180deg, rgba(20, 8, 4, 0.35) 0%, rgba(20, 8, 4, 0.82) 100%),
+                url('NITO.jpg') center/cover no-repeat;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.6), 0 8px 25px rgba(0,0,0,0.4);
+            border: 1px solid rgba(230, 184, 0, 0.3);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(230, 184, 0, 0.25) 0%, rgba(140, 83, 43, 0.35) 100%);
+            border: 1px solid var(--gold-accent);
+            color: var(--gold-hover);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .hero-header h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--text-light);
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.8), 0 0 30px rgba(212, 163, 115, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero-header p.subtitle {
+            color: var(--primary-amber);
+            font-size: 1.2rem;
+            font-weight: 500;
+            max-width: 750px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            margin-bottom: 24px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-badge {
+            background: rgba(35, 18, 9, 0.7);
+            border: 1px solid rgba(212, 163, 115, 0.4);
+            padding: 8px 16px;
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 0.88rem;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-badge strong {
+            color: var(--gold-accent);
+        }
+
+        /* Tab Navigation Bar */
+        .nav-tabs {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.98rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            background: rgba(212, 163, 115, 0.22);
+            border-color: var(--gold-accent);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #8c532b 0%, #5c3214 100%);
+            color: #ffffff;
+            border-color: var(--gold-accent);
+            box-shadow: 0 6px 20px rgba(230, 184, 0, 0.3);
+        }
+
+        /* Tab Content Containers */
+        .tab-content {
+            display: none;
+            animation: fadeInTab 0.45s ease-out forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInTab {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Shared Card Component */
+        .card {
+            background: var(--warm-ivory);
+            border-radius: var(--radius-card);
+            padding: 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--card-border-hover);
+        }
+
+        .card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-amber);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: var(--text-dark);
+            font-size: 0.98rem;
+            line-height: 1.65;
+            font-weight: 400;
+        }
+
+        /* TAB 1 LAYOUT: Aklan Province */
+        .three-square-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .full-rectangle {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(255, 250, 242, 0.95) 0%, rgba(245, 233, 218, 0.92) 100%);
+            border-left: 6px solid var(--gold-accent);
+        }
+
+        .full-rectangle p {
+            margin-bottom: 10px;
+        }
+
+        .full-rectangle p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* TAB 2 LAYOUT: Nito Weaving */
+        .nito-split-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .nito-left-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .references-card {
+            background: linear-gradient(180deg, rgba(255, 253, 248, 0.95) 0%, rgba(248, 238, 226, 0.9) 100%);
+            border-right: 5px solid var(--primary-amber);
+            height: 100%;
+        }
+
+        .references-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .references-card li {
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(110, 77, 59, 0.25);
+        }
+
+        .references-card li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .references-card a {
+            color: #7a3e1d;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.94rem;
+            transition: color 0.2s ease;
+            display: inline-block;
+            line-height: 1.4;
+        }
+
+        .references-card a:hover {
+            color: var(--gold-accent);
+            text-decoration: underline;
+        }
+
+        /* TAB 3 LAYOUT: Procedural Video & 16 Steps */
+        .video-procedural-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 26px;
+            align-items: start;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            background: #100603;
+            border: 2px solid var(--primary-amber);
+            margin-top: 10px;
+        }
+
+        .video-wrapper iframe, .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .steps-scroll-container {
+            max-height: 540px;
+            overflow-y: auto;
+            padding-right: 8px;
+            margin-top: 10px;
+        }
+
+        .steps-scroll-container::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        .steps-scroll-container::-webkit-scrollbar-track {
+            background: rgba(110, 77, 59, 0.1);
+            border-radius: 10px;
+        }
+
+        .steps-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--primary-amber);
+            border-radius: 10px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.88);
+            padding: 14px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-amber);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease;
+        }
+
+        .step-item:hover {
+            transform: translateX(4px);
+            background: #ffffff;
+            border-left-color: var(--gold-accent);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #7a3e1d 0%, #4a2411 100%);
+            color: #ffffff;
+            min-width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .step-text {
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            line-height: 1.45;
+            font-weight: 500;
+        }
+
+        /* TAB 4 LAYOUT: 9 Members Grid */
+        .members-section-title {
+            color: var(--text-light);
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .member-card {
+            text-align: center;
+            padding: 24px 18px;
+            align-items: center;
+        }
+
+        .member-avatar {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8c532b 0%, #4a2411 100%);
+            border: 3px solid var(--gold-accent);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .member-card h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--text-dark);
+            font-size: 1.12rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .member-card p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .nito-split-layout {
+                grid-template-columns: 1fr;
+            }
+            .nito-left-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .video-procedural-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 840px) {
+            .three-square-grid, .nito-left-grid, .members-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .container {
+                padding: 24px;
+            }
+            header h1 {
+                font-size: 2.1rem;
+            }
+        }
+
+        @media (max-width: 580px) {
+            .three-square-grid, .nito-left-grid, .members-grid {
+                grid-template-columns: 1fr;
+            }
+            .tab-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+		
+		/* Circular Member Photo Frame Styling */
+.member-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%; /* Forces a perfect circle frame */
+    object-fit: cover;  /* Prevents stretching/distortion */
+    display: block;
+    margin: 0 auto 12px auto;
+    border: 3px solid #d4a373; /* Gold/Bronze frame border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background-color: #e6ccb2; /* Fallback frame color if photo is missing */
+}
+
+/* Ensures member cards maintain alignment */
+.member-card {
+    text-align: center;
+    padding: 20px 15px;
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero Header with Background Image -->
+    <header class="hero-header">
+        <div class="hero-badge"> Group 4 </div>
+        <h1>Lampara de Nito</h1>
+        <p class="subtitle">Empowering and Promoting the Use of Local Materials</p>
+        
+        <div class="hero-stats">
+            <div class="stat-badge">📍 <span>Province: <strong>Aklan, Western Visayas</strong></span></div>
+            <div class="stat-badge">🌿 <span>Craft: <strong>Nito Crafting</strong></span></div>
+            <div class="stat-badge">🏛️ <span>Group: <strong>Number Four (4)</strong></span></div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('aklan-tab', this)">
+            <span>🌴</span> Aklan Province
+        </button>
+        <button class="tab-btn" onclick="switchTab('nito-tab', this)">
+            <span>🧺</span> Nito Material
+        </button>
+        <button class="tab-btn" onclick="switchTab('procedural-tab', this)">
+            <span>🎬</span> Procedural 
+        </button>
+        <button class="tab-btn" onclick="switchTab('members-tab', this)">
+            <span>👥</span> Group Members
+        </button>
+    </div>
+
+    <!-- TAB 1: AKLAN & Nito Fern Facts -->
+    <div id="aklan-tab" class="tab-content active">
+        <!-- Exactly 3 Equal-Sized Topic Squares -->
+        <div class="three-square-grid">
+            <div class="card">
+                <h3>Province & Nito Fern Facts</h3>
+                <p>Aklan is a province in the Western Visayas referred to as "The Shining Gem of Northern Panay". It is also a home to one of the most celebrated festivals, which is the "Ati-Atihan Festival".</p>
+            </div>
+            <div class="card">
+                <h3>Crafting Identity</h3>
+                <p>Aklanons are gifted in creativity and craftmanship. One of the most popular techniques is weaving, and one of the popular types of this is Nito weaving. Weavers are said to spend most of their time holding into Nito vines to form something creative out of </p>
+            </div>
+            <div class="card">
+                <h3>Handicrafts</h3>
+                <p>Aklan's handicrafts are known in the art sector. It is known for beng the "Queen of Philippine Fabrics" and famous for their God-gven talent in weaving.</p>
+            </div>
+        </div>
+
+        <!-- 1 Full-Width Rectangle: Fun Facts -->
+        <div class="card full-rectangle">
+            <h3>Did You Know? (Fun Facts!)</h3>
+            <p>• <strong>Fern Family:</strong> Nito comes from an ancient family of climbing ferns that has thrived on Earth for over 200 millon years, dating all the way back to the dinosaur era.</p>
+            <p>• <strong>Acts like a Mountain Climber:</strong> Nito ferns uses its flexible, growing main axis (rachis) to twine tightly to trees and rock faces, pulling itself up out of the shady forest to reach the sunlight.</p>
+            <p>• <strong>10 Meter Fern Climber:</strong> As Nito fern is known as a climbing fern, it can develop climbing fronds that reach approaximately 10 meters long due to its flexible rachis that twists around nearby begetation, allowing it to spread upward through the forest.</p>
+        </div>
+    </div>
+
+    <!-- TAB 2: NITO WEAVING -->
+    <div id="nito-tab" class="tab-content">
+        <div class="nito-split-layout">
+            <!-- Left Side: Exactly 3 Topic Squares -->
+            <div class="nito-left-grid">
+                <div class="card">
+                    <h3>Place of Origin</h3>
+                    <p>Nito grows in many parts of the Philippines, especially in forests at low and medium altitudes. One of the places where nito grows best is the province of Aklan, where weavers source the wild vine from forested towns such as Nabas, Ibajay, and Buruanga. Aside from Aklan, the vine also grows in the forest areas of Mindanao in Southern Philippines and other places like Mindoro, Surigao del Sur, and Iloilo. </p>
+                </div>
+                <div class="card">
+                    <h3>Source Plant</h3>
+                    <p>Nito comes from the nito plant (Lygodium circinnatum), which is a climbing fern belonging to the fern family. The part of the plant used for crafting is its stem, which grows like a vine that climbs around trees and rocks. This stem is long, thin, and durable, and the weaving strips are taken from it, specifically from the inner core of the stem, while the outer layer is removed.</p>
+                </div>
+                <div class="card">
+                    <h3>Common Products</h3>
+                    <p>The common products that are made from Nito materials are handwoven baskets, decorative jars, bags, and homedecors.</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Tall Expanded References Rectangle -->
+            <div class="card references-card">
+                <h3>References & Links</h3>
+                <p style="margin-bottom: 12px; font-size: 0.9rem;">Explore primary documentation, government archives, and research publications on Nito craft preservation:</p>
+                <ul>
+                    <li>
+                        <a href="https://www.scribd.com/document/588280886/nito-weaving" target="_blank">🏛️Nito Weaving: Aklan's Hidden Craft </a>
+                    </li>
+                    <li>
+                        <a href="https://cids.up.edu.ph/wp-content/uploads/2025/09/Documenting-the-Craft-the-Artisans-and-their-Weaves.pdf?fbclid=IwY2xjawVISqxleHRuA2FlbQIxMQBwZG9mA3NydGMGYXBwX2lkATAAAR7aXp99cAlPtvieXw1_n6eqn9oCrloH2hrZZ0jXoqtRHNkar3ic2FDnI_BA8w_aem_6nW7HCETpDO5AHdkkkVW_A" target="_blank">📜Documenting the Craft, the Artisans, and their Weaves</a>
+                    </li>
+                    <li>
+                        <a href="https://smartcebu.wordpress.com/materials-library/nito-vine/?fbclid=IwY2xjawVISvdleHRuA2FlbQIxMQBwZG9mA3NydGMGYXBwX2lkATAAAR7789xppWhkCfhFm_Oo0Rn-r9DgaVOkN8_LVmQIqYZaS38B7U5Ia_Cb0SYwFw_aem_n1P3jlfyXytsU7OosqTOjw" target="_blank">🧺Nito Vine</a>
+                    </li>
+                     <li>
+                        <a href="https://www.viriar.com/es/blogs/tree-fern-encyclopedia/lygodium-circinatum?srsltid=AYCX9vLcE_OOXwklZ1pYUgr_7X9b363Py32tYi965nHfqt04FWYlPd7i&fbclid=IwY2xjawVIS1xleHRuA2FlbQIxMQBwZG9mA3NydGMGYXBwX2lkATAAAR6wiHYcc4fGrlB5k-Dx8swYMfdE9kpKNlYKdy2nG-xZ0iSfyGTx-i_81Hu0Sw_aem_GUgamYkQtWCAJ41uJLGMKw" target="_blank">🏛 Lygodium Circinnatum (Nito, Climbing Maidenhair, Basket Fern)</a>
+                    </li>
+					 <li>
+                        <a href="https://cmpg.upv.edu.ph/heritage/pagtahi-it-nito-nito-weaving/?fbclid=IwY2xjawVIS9NleHRuA2FlbQIxMQBwZG9mA3NydGMGYXBwX2lkATAAAR4BoioRIbLcINZSlYC8I6-2D9V3gLR_qxkmU9iHBfp5HJrxwjP0ydALV0VhAQ_aem_6x-9oBBUZBJBuMuTvXP8XA" target="_blank">📜Pagtahi It Nito (Nito Weaving)</a>
+                    </li>
+					 <li>
+                        <a href="https://prosea.prota4u.org/view.aspx?id=3191&fbclid=IwY2xjawVITEZleHRuA2FlbQIxMQBwZG9mA3NydGMGYXBwX2lkATAAAR71DR-fUJSRAhRrzcmAMXUsfzWEAK-Jg2RWHEMx1Z17iNqwTBpdFTzIuZbsAg_aem_XKtiHHcglQqQGZ6AWJDMwg" target="_blank">🧺Record Display of Nito</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: PROCEDURAL CRAFT DEMONSTRATION -->
+    <div id="procedural-tab" class="tab-content">
+        <div class="video-procedural-layout">
+            <!-- Left Side: 1 Single Video Player Box -->
+            <div class="card">
+                <h3>Procedural Craft Video of Nito Lamp</h3>
+                <p>Watch how group 4 utilized Nito material into crafting a creative lamp!</p>
+                <div class="video-wrapper">
+                    <!-- Replace 'your-video.mp4' with your video file name or YouTube embed embed URL -->
+                    <video controls poster="https://placehold.co/800x450/3a1c0d/fefae0?text=Nito+Crafting+Demonstration+Video">
+                        <source src="bid.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <!-- Right Side: 16 Sequential Steps in a Scrollable Container -->
+            <div class="card">
+                <h3>16-Step Crafting Guide</h3>
+                <div class="steps-scroll-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Disassemble the Nito until you’ve reached the last layer (circular shaped). </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Cut out the excess length of the structure. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Make a ring-shaped upper base using Nito, and secure it by wrapping a thinner Nito around the ring. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-text">Attach strips of Nito on the lower base to measure which fits, then stick it to the upper ring base. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-text">Make another ring—bigger than the base—to make centered band and improve the shape.</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">6</div>
+                        <div class="step-text">For the stand, make a checkered board using Nito, then bind it with twine. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">7</div>
+                        <div class="step-text">Trace the areas of the lamp on paper, and use it to cut the right Abaca measure for cover. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">8</div>
+                        <div class="step-text">Tie the Nito infersections with twine to secure it. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">9</div>
+                        <div class="step-text">Attach the Abaca cover to the areas of the lamp. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">10</div>
+                        <div class="step-text">Cut leaves in triangular shapes to use as a design.</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">11</div>
+                        <div class="step-text">Cut short Nito pieces to cover the lower part of the leaves. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">12</div>
+                        <div class="step-text">Cut the leaves in stripes and use it to cover the lower part of the lamp. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">13</div>
+                        <div class="step-text">Braid two Nito pieces together and use it to cover the main stand, and the remaining for the handle of the lamp. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">14</div>
+                        <div class="step-text">Shape a wire into a stand, which will be covered in Nito braids. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">15</div>
+                        <div class="step-text">Cover the glue stick remains on the structure with twine to make it look clean. </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">16</div>
+                        <div class="step-text">Attach the stand on top of the board (base) and wrap its outer part with ribbon for added element.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- TAB 4: GROUP MEMBERS -->
+    <div id="members-tab" class="tab-content">
+        <h2 class="members-section-title">Group 4 Members</h2>
+        
+        <div class="members-grid">
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="NIEZKA.jpg" alt="Member 1">
+                </div>
+                <h4>Kyleen Niezka A. Balmaceda</h4>
+                <p>Crafter</p>
+            </div>
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="AYA.jpg" alt="Member 2">
+                </div>
+                <h4>Brenda Aya Chloe Montives</h4>
+                <p>Crafter</p>
+            </div>
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="NINA.jpg" alt="Member 3">
+                </div>
+                <h4>Niña Malana Capal</h4>
+                <p>Crafter</p>
+            </div>
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="Nito/VENICE.jpg" alt="Member 4">
+                </div>
+                <h4>Venice Huergula</h4>
+                <p>Crafter</p>
+            </div>
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="ANGELA.jpg" alt="Member 5">
+                </div>
+                <h4>Angela Balahadia</h4>
+                <p>Crafter</p>
+            </div>
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="ZYAN.jpg" alt="Member 6">
+                </div>
+                <h4>Zyan Rejoyce Rivera</h4>
+                <p>Crafter</p>
+            </div>
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="JOEM.jpg" alt="Member 7">
+                </div>
+                <h4>Joem Cornista</h4>
+                <p>Crafter</p>
+            </div>
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="LEE.jpg" alt="Member 8">
+                </div>
+                <h4>Chris Lee Gaveria</h4>
+                <p>Crafter</p>
+            </div>
+
+            <div class="card member-card">
+                <div class="photo-frame">
+                    <img class="member-photo" src="EVO.jpg" alt="Member 9">
+                </div>
+                <h4>Johnver James Alvior</h4>
+                <p>Crafter</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    /**
+     * Tab Switching Functionality
+     * @param {string} tabId - The DOM ID of the tab content panel to display
+     * @param {HTMLElement} btnElement - The clicked button element
+     */
+    function switchTab(tabId, btnElement) {
+        // Hide all tab content panes
+        const allContents = document.querySelectorAll('.tab-content');
+        allContents.forEach(content => {
+            content.classList.remove('active');
+        });
+
+        // Deactivate all navigation buttons
+        const allButtons = document.querySelectorAll('.tab-btn');
+        allButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Activate targeted tab pane and button
+        document.getElementById(tabId).classList.add('active');
+        btnElement.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
